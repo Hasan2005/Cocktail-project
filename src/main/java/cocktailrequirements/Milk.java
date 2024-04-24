@@ -7,7 +7,6 @@ public class Milk extends Liquids{
     
     public Milk(String name, float calories, short volumeInMilliLiter, RGB color) {
         //fullFat -> true ... volume *fullFat calories
-        super(name, calories, volumeInMilliLiter, color);  
     }
     
     public boolean isFullFat() {

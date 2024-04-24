@@ -6,13 +6,6 @@ public abstract class Ingredient {
    protected  float calories;
    protected short volumeInMilliLiter;
     
-    public Ingredient(String name, float calories, short volumeInMilliLiter)
-    {
-        this.name = name;
-        this.calories = calories;
-        this.volumeInMilliLiter = volumeInMilliLiter;
-    }
-
     public String getName() {
         return name;
     }
