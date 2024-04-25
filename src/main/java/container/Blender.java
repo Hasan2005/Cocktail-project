@@ -64,7 +64,7 @@ public class Blender implements MixtureInfo{
         short red = 0, green = 0, blue = 0;
         for(Ingredient ingredient: blender)
         {
-            Color color = new Color(ingredient.getRed(), ingredient.getGreen, ingredient,getBlue);
+            RGB color = ingredient.getColor();
             red+= color.getRed();
             green+= color.getGreen();
             blue+= color.getBlue();
