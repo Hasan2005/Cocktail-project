@@ -1,9 +1,9 @@
 
-package cocktailrequirements;
+package interfaces;
 
 public interface MixtureInfo {
     
-    short calculateCalories();
+    float calculateCalories();
     String getColor();
     
 }

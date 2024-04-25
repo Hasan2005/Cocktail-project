@@ -1,5 +1,5 @@
 
-package cocktailrequirements;
+package colors;
 
 public class RGB {
     
@@ -12,11 +12,6 @@ public class RGB {
          this.red = red;
          this.green = green;
          this.blue = blue;
-    }
-    
-    public String getColor(short red, short green, short blue) // return the color name
-    {
-         throw new UnsupportedOperationException("Not supported yet."); 
     }
     
 }

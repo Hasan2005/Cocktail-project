@@ -2,6 +2,8 @@ cocktailrequirements\Apple.class
 cocktailrequirements\Fruit.class
 com\mycompany\cocktail\Cocktail.class
 cocktailrequirements\RGB.class
+cocktailrequirements\Mango.class
+cocktailrequirements\Banana.class
 cocktailrequirements\Ingredient.class
 cocktailrequirements\Liquids.class
 cocktailrequirements\Milk.class
