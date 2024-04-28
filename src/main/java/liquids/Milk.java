@@ -6,10 +6,10 @@ import colors.RGB;
 
 public class Milk extends Ingredient{
     
-    public Milk(String name, float calories, short volumeInMilliLiter, RGB color) {
+    public Milk(int volumeInMilliLiter, int calories) {
         name = "Milk";
-        calories = 35;
-        volumeInMilliLiter = 100;
+        this.calories = calories;
+        this.volumeInMilliLiter = volumeInMilliLiter;
         color = new RGB((short) 255,(short) 255,(short) 255);
     }
 

@@ -6,7 +6,7 @@ public abstract class Ingredient {
 
    protected  String name;
    protected  float calories;
-   protected short volumeInMilliLiter;
+   protected int volumeInMilliLiter;
    public RGB color;
    
     public String getName() {
@@ -17,7 +17,7 @@ public abstract class Ingredient {
         return calories;
     }
 
-    public short getVolumeInMilliLiter() {
+    public int getVolumeInMilliLiter() {
         return volumeInMilliLiter;
     }
     

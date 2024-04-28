@@ -10,15 +10,12 @@ import java.awt.Color;
 
 public class Blender implements MixtureInfo{
     
-   private  ArrayList<Ingredient>blender;
+   private ArrayList<Ingredient>blender = new ArrayList<>();
    private static final short  capacityInMilliLiter = 1200;
    private int volumeInMilliLiter;
    private boolean blended;
    private static float totalAmountOfCalories;
    
-   public Blender(ArrayList<Ingredient>blender){
-       this.blender = blender;
-   }
    
     public ArrayList<Ingredient> getBlender() {
         return blender;
@@ -39,16 +36,6 @@ public class Blender implements MixtureInfo{
     public static float getTotalAmountOfCalories() {
         return totalAmountOfCalories;
     }
-    
-    
-    public void printBlenderIngredients()
-    {
-        for(Ingredient ingredient: blender)
-            System.out.println("ingredient: " + ingredient.getName() +
-                                            " \ncalories: " + ingredient.getCalories() +
-                                            " \ningredient volume in ml: " +ingredient.getVolumeInMilliLiter() +
-                                            " \ningredient color: " + ingredient.getColor());
-    }
    
    
    public void addIngredient(Ingredient ingredient) throws BlenderOverflowException
@@ -56,7 +43,8 @@ public class Blender implements MixtureInfo{
        if(ingredient.getVolumeInMilliLiter()+ volumeInMilliLiter <= capacityInMilliLiter)
        {
            blender.add(ingredient);
-           volumeInMilliLiter+= ingredient.getCalories();
+           volumeInMilliLiter += ingredient.getVolumeInMilliLiter();
+           totalAmountOfCalories += ingredient.getCalories();
        }
        
        else
@@ -121,12 +109,32 @@ public class Blender implements MixtureInfo{
     }
 
    public String getInfo() {
-       System.out.print("blender cotains:\n ");
-       printBlenderIngredients();
-         return "Blender volume in ml: " + this.getVolumeInMilliLiter() + 
-                    "\nBlender capacity in ml: " + capacityInMilliLiter +
-                    "\ntotal amout of calories: " + totalAmountOfCalories;
-                            
-}
+    StringBuilder info = new StringBuilder();
+    info.append("Blender Contents:\n");
+    for (Ingredient ingredient : blender) {
+        info.append("- ")
+            .append(ingredient.getName())
+            .append(": ")
+            .append(ingredient.getVolumeInMilliLiter())
+            .append(" mL, ")
+            .append(ingredient.getCalories())
+            .append(" calories, ")
+            .append(ingredient.getColor())
+            .append("\n");
+    }
+    info.append("Total Calories: ")
+        .append(getTotalAmountOfCalories())
+        .append("\n")
+        .append("Current Volume: ")
+        .append(getVolumeInMilliLiter())
+        .append(" mL")
+        .append("\n")
+        .append("Capacity: ")
+        .append(getCapacityInMilliLiter())
+        .append(" mL\n")
+        .append("Final color: ")
+        .append(getColor());
+    return info.toString();
+    }
     
 }
