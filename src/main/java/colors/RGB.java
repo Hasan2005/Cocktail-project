@@ -16,7 +16,7 @@ public class RGB {
         this.blue = blue;
     }
 
-    public String getName() {
+    public  String getColorName() {
         Map<String, Color> colorMap = new HashMap<>();
         colorMap.put("Red", new Color(0xFF, 0x00, 0x00));
         colorMap.put("Green", new Color(0x00, 0xFF, 0x00));

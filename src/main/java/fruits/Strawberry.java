@@ -1,9 +1,9 @@
 package fruits;
 
-import basaeclasses.Fruit;
+import basaeclasses.Ingredient;
 import colors.RGB;
 
-public class Strawberry extends Fruit{
+public class Strawberry extends Ingredient{
 
     public Strawberry() {
         name = "Strawberry";

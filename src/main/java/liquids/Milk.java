@@ -1,10 +1,10 @@
 package liquids;
 
-import basaeclasses.Liquids;
+import basaeclasses.Ingredient;
 import interfaces.MixtureInfo;
 import colors.RGB;
 
-public class Milk extends Liquids{
+public class Milk extends Ingredient{
     
     public Milk(String name, float calories, short volumeInMilliLiter, RGB color) {
         name = "Milk";

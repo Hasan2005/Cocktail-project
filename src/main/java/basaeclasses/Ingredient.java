@@ -24,11 +24,12 @@ public abstract class Ingredient {
     public  float caloriesPerMilliLiter(){
         return calories/ volumeInMilliLiter;
     }
-
-    public RGB getColor() {
-        return color;
+    
+    public String getColor() {
+        return color.getColorName();
     }
     
-    
- 
+    public RGB getColorRGB(){
+        return color;
+    } 
 }

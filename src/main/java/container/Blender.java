@@ -12,9 +12,44 @@ public class Blender implements MixtureInfo{
     
    private  ArrayList<Ingredient>blender;
    private static final short  capacityInMilliLiter = 1200;
-   private short volumeInMilliLiter;
+   private int volumeInMilliLiter;
    private boolean blended;
-   private static float calories;
+   private static float totalAmountOfCalories;
+   
+   public Blender(ArrayList<Ingredient>blender){
+       this.blender = blender;
+   }
+   
+    public ArrayList<Ingredient> getBlender() {
+        return blender;
+    }
+
+    public static short getCapacityInMilliLiter() {
+        return capacityInMilliLiter;
+    }
+
+    public  int getVolumeInMilliLiter() {
+        return volumeInMilliLiter;
+    }
+
+    public boolean isBlended() {
+        return blended;
+    }
+
+    public static float getTotalAmountOfCalories() {
+        return totalAmountOfCalories;
+    }
+    
+    
+    public void printBlenderIngredients()
+    {
+        for(Ingredient ingredient: blender)
+            System.out.println("ingredient: " + ingredient.getName() +
+                                            " \ncalories: " + ingredient.getCalories() +
+                                            " \ningredient volume in ml: " +ingredient.getVolumeInMilliLiter() +
+                                            " \ningredient color: " + ingredient.getColor());
+    }
+   
    
    public void addIngredient(Ingredient ingredient) throws BlenderOverflowException
    {
@@ -38,9 +73,14 @@ public class Blender implements MixtureInfo{
             blended = true;
    }
    
-   public void pour(int numberOforederedCups)
+   public void pour(int numberOforederedCups, int cupSize) throws EmptyBlenderException,  NotBlendedException
    {
-       volumeInMilliLiter -= numberOforederedCups * 300;
+       if(isEmpty())
+           throw new EmptyBlenderException();
+       else if(!blended)
+           throw new NotBlendedException();
+       else
+            volumeInMilliLiter -= numberOforederedCups * cupSize;
    }
    
    public boolean isEmpty()
@@ -53,9 +93,9 @@ public class Blender implements MixtureInfo{
     {
        for(Ingredient ingredient:blender)
         {
-            calories+= ingredient.getCalories();
+           totalAmountOfCalories+= ingredient.getCalories();
         }
-        return calories;
+        return totalAmountOfCalories;
     }
 
     @Override
@@ -64,7 +104,7 @@ public class Blender implements MixtureInfo{
         short red = 0, green = 0, blue = 0;
         for(Ingredient ingredient: blender)
         {
-            RGB color = ingredient.getColor();
+            RGB color = ingredient.getColorRGB();
             red+= color.getRed();
             green+= color.getGreen();
             blue+= color.getBlue();
@@ -76,8 +116,17 @@ public class Blender implements MixtureInfo{
         blue/= (short) ingredientsCount;
         
         RGB color = new RGB(red, green, blue);
-        return color.getName();
+        return color.getColorName();
         
     }
-   
+
+   public String getInfo() {
+       System.out.print("blender cotains:\n ");
+       printBlenderIngredients();
+         return "Blender volume in ml: " + this.getVolumeInMilliLiter() + 
+                    "\nBlender capacity in ml: " + capacityInMilliLiter +
+                    "\ntotal amout of calories: " + totalAmountOfCalories;
+                            
+}
+    
 }
