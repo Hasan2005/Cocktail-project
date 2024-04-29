@@ -5,7 +5,7 @@ public class BlenderOverflowException extends Exception{
 
     @Override
     public String getMessage()  {
-        return "adding this ingredient will cause an overflow";
+        return "adding  will cause an overflow";
     }
    
 }

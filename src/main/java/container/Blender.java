@@ -7,15 +7,16 @@ import basaeclasses.Ingredient;
 import exceptions.blender.*;
 import java.util.ArrayList;
 import java.awt.Color;
+import fruits.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Blender implements MixtureInfo{
     
    private ArrayList<Ingredient>blender = new ArrayList<>();
    private static final short  capacityInMilliLiter = 1200;
    private int volumeInMilliLiter;
-   private boolean blended;
    private static float totalAmountOfCalories;
-   
    
     public ArrayList<Ingredient> getBlender() {
         return blender;
@@ -29,18 +30,14 @@ public class Blender implements MixtureInfo{
         return volumeInMilliLiter;
     }
 
-    public boolean isBlended() {
-        return blended;
-    }
-
     public static float getTotalAmountOfCalories() {
         return totalAmountOfCalories;
     }
    
    
-   public void addIngredient(Ingredient ingredient) throws BlenderOverflowException
+   public void addIngredient(Ingredient ingredient, int cup, int numberOfCups) throws BlenderOverflowException
    {
-       if(ingredient.getVolumeInMilliLiter()+ volumeInMilliLiter <= capacityInMilliLiter)
+       if(ingredient.getVolumeInMilliLiter()+ volumeInMilliLiter <= cup*numberOfCups)
        {
            blender.add(ingredient);
            volumeInMilliLiter += ingredient.getVolumeInMilliLiter();
@@ -51,26 +48,23 @@ public class Blender implements MixtureInfo{
            throw new BlenderOverflowException();
    }
        
-   
    public void blend() throws EmptyBlenderException
    {
         if(isEmpty()){
             throw new EmptyBlenderException();
         }
         else 
-            blended = true;
+           getInfo();
    }
    
    public void pour(int numberOforederedCups, int cupSize) throws EmptyBlenderException,  NotBlendedException
    {
        if(isEmpty())
            throw new EmptyBlenderException();
-       else if(!blended)
-           throw new NotBlendedException();
        else
             volumeInMilliLiter -= numberOforederedCups * cupSize;
    }
-   
+  
    public boolean isEmpty()
    {
        return blender.isEmpty();
@@ -109,19 +103,35 @@ public class Blender implements MixtureInfo{
     }
 
    public String getInfo() {
+        Map<String, Integer> fruitMap = new HashMap<>();
+        boolean milkAdded = false;
+        double milkVolume = 0;
+        for(Ingredient ingredient : blender){
+            if(ingredient.getName().equals("Milk")){
+                  milkAdded = true;
+                  milkVolume = ingredient.getVolumeInMilliLiter();
+                continue;
+            }
+          if (fruitMap.containsKey(ingredient.getName()))
+                fruitMap.put(ingredient.getName(), fruitMap.get(ingredient.getName()) + 1);
+            else
+                fruitMap.put(ingredient.getName(), 1);
+        }
+        StringBuilder numberOfFruits = new StringBuilder();
+        for (String key : fruitMap.keySet()) {
+            numberOfFruits.append("Number of ")
+                                    .append(key)
+                                    .append('s')
+                                    .append(": ")
+                                    .append(fruitMap.get(key))
+                                    .append("\n");
+        }
+        if(milkAdded){
+            numberOfFruits.append("Milk volume :")
+                                     .append(milkVolume);
+        }
     StringBuilder info = new StringBuilder();
     info.append("Blender Contents:\n");
-    for (Ingredient ingredient : blender) {
-        info.append("- ")
-            .append(ingredient.getName())
-            .append(": ")
-            .append(ingredient.getVolumeInMilliLiter())
-            .append(" mL, ")
-            .append(ingredient.getCalories())
-            .append(" calories, ")
-            .append(ingredient.getColor())
-            .append("\n");
-    }
     info.append("Total Calories: ")
         .append(getTotalAmountOfCalories())
         .append("\n")
@@ -133,7 +143,9 @@ public class Blender implements MixtureInfo{
         .append(getCapacityInMilliLiter())
         .append(" mL\n")
         .append("Final color: ")
-        .append(getColor());
+        .append(getColor())
+        .append("\n")
+        .append(numberOfFruits);
     return info.toString();
     }
     

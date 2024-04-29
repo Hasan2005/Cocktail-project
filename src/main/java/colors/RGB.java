@@ -6,11 +6,11 @@ import java.util.Map;
 
 public class RGB {
 
-    private short red;
-    private short green;
-    private short blue;
+    private int red;
+    private int green;
+    private int blue;
 
-    public RGB(short red, short green, short blue) {
+    public RGB(int red, int green, int blue) {
         this.red = red;
         this.green = green;
         this.blue = blue;
@@ -75,16 +75,30 @@ public class RGB {
         return Math.sqrt(dr * dr + dg * dg + db * db);
     }
 
-    public short getRed() {
+    public int  getRed() {
         return red;
     }
 
-    public short getGreen() {
+    public int getGreen() {
         return green;
     }
 
-    public short getBlue() {
+    public int getBlue() {
         return blue;
     }
     
+    public String getInfo()
+    {
+        StringBuilder info = new StringBuilder();
+        
+        info.append("-------------------------------------------------------------------------\n")
+                .append("color name: ")
+                .append(getColorName())
+                .append("\n")
+                .append("RGB value: ")
+                .append(getRed() + "," +  getGreen() + "," + getBlue())
+                .append("\n----------------------------------------------------------------------------");
+        
+        return info.toString();
+    }
 }

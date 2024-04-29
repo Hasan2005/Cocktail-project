@@ -5,9 +5,18 @@ import colors.RGB;
 public abstract class Ingredient {
 
    protected  String name;
-   protected  float calories;
-   protected int volumeInMilliLiter;
-   public RGB color;
+   protected  double calories;
+   protected double volumeInMilliLiter;
+   protected  RGB color;
+   private static int count;
+   
+   public Ingredient(){
+       count++;
+   }
+   
+    public static void setCount(int count) {
+        Ingredient.count = count;
+    }
    
     public String getName() {
         return name;
@@ -17,11 +26,11 @@ public abstract class Ingredient {
         return calories;
     }
 
-    public int getVolumeInMilliLiter() {
+    public double getVolumeInMilliLiter() {
         return volumeInMilliLiter;
     }
     
-    public  float caloriesPerMilliLiter(){
+    public  double caloriesPerMilliLiter(){
         return calories/ volumeInMilliLiter;
     }
     
@@ -31,5 +40,11 @@ public abstract class Ingredient {
     
     public RGB getColorRGB(){
         return color;
-    } 
+    }
+
+    public static int getCount() {
+        return count;
+    }
+    
+    public abstract String  getInfo();
 }
