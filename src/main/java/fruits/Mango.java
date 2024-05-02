@@ -15,14 +15,6 @@ public class Mango extends  Ingredient  {
         color = new RGB((short) 255,(short) 165,(short) 0);
     }
     
-    public static int getCount() {
-        return count;
-    }
-    
-     public static void setCount(int count) {
-        Mango.count= count;
-    }
-
     @Override
    public String getInfo()
     {

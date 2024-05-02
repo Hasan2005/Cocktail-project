@@ -3,7 +3,7 @@ package interfaces;
 
 public interface MixtureInfo {
     
-    float calculateCalories();
+   double calculateCalories();
     String getColor();
     
 }

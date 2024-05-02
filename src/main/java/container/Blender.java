@@ -14,15 +14,12 @@ import java.util.Map;
 public class Blender implements MixtureInfo{
     
    private ArrayList<Ingredient>blender = new ArrayList<>();
-   private static final short  capacityInMilliLiter = 1200;
+   private static final int  capacityInMilliLiter = 1200;
    private int volumeInMilliLiter;
-   private static float totalAmountOfCalories;
+   private static double totalAmountOfCalories;
+   private boolean blended;
    
-    public ArrayList<Ingredient> getBlender() {
-        return blender;
-    }
-
-    public static short getCapacityInMilliLiter() {
+    public static int  getCapacityInMilliLiter() {
         return capacityInMilliLiter;
     }
 
@@ -30,12 +27,18 @@ public class Blender implements MixtureInfo{
         return volumeInMilliLiter;
     }
 
-    public static float getTotalAmountOfCalories() {
+    public static double getTotalAmountOfCalories() {
         return totalAmountOfCalories;
+    }
+    
+    public void clearIngredients(){
+        volumeInMilliLiter = 0;
+        totalAmountOfCalories = 0;
+            blender.clear();
     }
    
    
-   public void addIngredient(Ingredient ingredient, int cup, int numberOfCups) throws BlenderOverflowException
+    public void addIngredient(Ingredient ingredient, int cup, int numberOfCups) throws BlenderOverflowException
    {
        if(ingredient.getVolumeInMilliLiter()+ volumeInMilliLiter <= cup*numberOfCups)
        {
@@ -50,19 +53,34 @@ public class Blender implements MixtureInfo{
        
    public void blend() throws EmptyBlenderException
    {
-        if(isEmpty()){
+        if(isEmpty())
+        {
             throw new EmptyBlenderException();
         }
-        else 
-           getInfo();
+        else
+        {
+           System.out.println("================================\n"
+                                       + "Color: " + getColor()
+                                       +"\nTotal Calories: " + getTotalAmountOfCalories()
+                                       +"\n================================\n");
+           blended = true;
+        }
    }
    
    public void pour(int numberOforederedCups, int cupSize) throws EmptyBlenderException,  NotBlendedException
    {
        if(isEmpty())
            throw new EmptyBlenderException();
+       else if (!blended)
+           throw new NotBlendedException();
        else
+       {
             volumeInMilliLiter -= numberOforederedCups * cupSize;
+            System.out.println("================================\n"
+                                       + "number of cups: " + numberOforederedCups + "\n"
+                                       + "calories per cup: " + (totalAmountOfCalories/numberOforederedCups) + "\n"
+                                       +  this.getInfo());
+       }
    }
   
    public boolean isEmpty()
@@ -71,7 +89,7 @@ public class Blender implements MixtureInfo{
    }
 
     @Override
-    public float calculateCalories()
+    public double calculateCalories()
     {
        for(Ingredient ingredient:blender)
         {
@@ -117,22 +135,34 @@ public class Blender implements MixtureInfo{
             else
                 fruitMap.put(ingredient.getName(), 1);
         }
-        StringBuilder numberOfFruits = new StringBuilder();
+        StringBuilder blenderContents = new StringBuilder();
         for (String key : fruitMap.keySet()) {
-            numberOfFruits.append("Number of ")
+            blenderContents.append("Number of ")
                                     .append(key)
                                     .append('s')
                                     .append(": ")
                                     .append(fruitMap.get(key))
                                     .append("\n");
         }
-        if(milkAdded){
-            numberOfFruits.append("Milk volume :")
+        if(milkAdded)
+        {
+            blenderContents.append("Milk volume :")
                                      .append(milkVolume);
         }
+        if(blended)
+        {
+            blenderContents.append("Ingredient Blended ")       
+                                     .append("\nFinal color: ")
+                                     .append(getColor());
+        }
+        else
+        {
+            blenderContents.append("Ingredient not blended\n");
+        }
     StringBuilder info = new StringBuilder();
-    info.append("Blender Contents:\n");
-    info.append("Total Calories: ")
+    info.append("================================\n")
+         .append("Blender Contents:\n")
+         .append("Total Calories: ")
         .append(getTotalAmountOfCalories())
         .append("\n")
         .append("Current Volume: ")
@@ -142,11 +172,10 @@ public class Blender implements MixtureInfo{
         .append("Capacity: ")
         .append(getCapacityInMilliLiter())
         .append(" mL\n")
-        .append("Final color: ")
-        .append(getColor())
-        .append("\n")
-        .append(numberOfFruits);
+        .append(blenderContents)
+        .append("\n================================");
+        
     return info.toString();
     }
-    
+        
 }

@@ -5,24 +5,13 @@ import colors.RGB;
 
 public class Apple extends Ingredient{
     
-    private static int count;
-    
     public Apple() {
         name = "Apple";
         color = new RGB( 255, 0, 0);
         volumeInMilliLiter = 50;
         calories = 90;
-        count++;
     }
    
-    public static int getCount() {
-        return count;
-    }
-
-    public static void setCount(int count) {
-        Apple.count = count;
-    }
-    
     @Override
      public String getInfo()
     {

@@ -5,21 +5,11 @@ import colors.RGB;
 
 public class Strawberry extends Ingredient{
 
-    private static int count;
-    
     public Strawberry() {
         name = "Strawberry";
         calories = 4;
         volumeInMilliLiter = 10;
         color = new RGB( 255, 35, 35);
-    }
-    
-    public static int getCount() {
-        return count;
-    }
-    
-     public static void setCount(int count) {
-        Strawberry.count = count;
     }
     
     @Override

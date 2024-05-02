@@ -14,14 +14,6 @@ public class Peach extends Ingredient{
         color = new RGB(255, 220, 190);
     }
     
-    public static int getCount() {
-        return count;
-    }
-    
-     public static void setCount(int count) {
-        Peach.count = count;
-    }
-    
     @Override
      public String getInfo()
     {
