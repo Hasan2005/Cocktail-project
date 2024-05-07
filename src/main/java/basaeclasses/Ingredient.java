@@ -4,11 +4,10 @@ import colors.RGB;
 
 public abstract class Ingredient {
 
-   protected  String name;
-   protected  double calories;
+   protected String name;
+   protected double calories;
    protected double volumeInMilliLiter;
-   protected  RGB color;
-  
+   protected RGB color;
     public String getName() {
         return name;
     }

@@ -12,9 +12,11 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 public class Cocktail {
 
     public static void main(String[] args) {
+        new WelcomeFrame().setVisible(true);
         Blender blender = new Blender();
         Scanner read = new Scanner(System.in);
         System.out.println("welcome to our restaurant" );
@@ -135,8 +137,8 @@ public class Cocktail {
                                 if(MilkAdd == 1)
                                 {
                                     double quarterCupSize = cupSize*0.25;
-                                    double something = numberOfCups*quarterCupSize;
-                                    Milk milk = new Milk(something, something);
+                                    double milkQ = numberOfCups*quarterCupSize;
+                                    Milk milk = new Milk(numberOfCups*cupSize*0.25, numberOfCups*cupSize*0.25);
                                     try 
                                     {
                                         blender.addIngredient(milk, cupSize, numberOfCups);
@@ -242,7 +244,7 @@ public class Cocktail {
                                 } 
                                 catch (BlenderOverflowException ex)
                                 {
-                                         System.out.println(ex.getMessage() + " , we added " + (i  - 1) + " strawberry11 ");
+                                         System.out.println(ex.getMessage() + " , we added " + (i  - 1) + " strawberries ");
                                         System.out.println("remaining capacity: " + (cupSize*numberOfCups - blender.getVolumeInMilliLiter()));
                                 }
                             break;

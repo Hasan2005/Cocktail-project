@@ -86,7 +86,7 @@ public class Blender implements MixtureInfo{
    public boolean isEmpty()
    {
        return blender.isEmpty();
-   }
+   }    
 
     @Override
     public double calculateCalories()
@@ -119,7 +119,7 @@ public class Blender implements MixtureInfo{
         return color.getColorName();
         
     }
-
+    
    public String getInfo() {
         Map<String, Integer> fruitMap = new HashMap<>();
         boolean milkAdded = false;
@@ -147,17 +147,17 @@ public class Blender implements MixtureInfo{
         if(milkAdded)
         {
             blenderContents.append("Milk volume :")
-                                     .append(milkVolume);
+                           .append(milkVolume);
         }
         if(blended)
         {
-            blenderContents.append("Ingredient Blended ")       
+            blenderContents.append("\nIngredient Blended ")       
                                      .append("\nFinal color: ")
                                      .append(getColor());
         }
         else
         {
-            blenderContents.append("Ingredient not blended\n");
+            blenderContents.append("\nIngredient not blended");
         }
     StringBuilder info = new StringBuilder();
     info.append("================================\n")
@@ -174,7 +174,6 @@ public class Blender implements MixtureInfo{
         .append(" mL\n")
         .append(blenderContents)
         .append("\n================================");
-        
     return info.toString();
     }
         

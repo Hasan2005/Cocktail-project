@@ -6,7 +6,7 @@ import colors.RGB;
 
 public class Milk extends Ingredient{
     
-    public Milk(double volumeInMilliLiter, double calories) {
+        public Milk(double volumeInMilliLiter, double calories){
         name = "Milk";
         this.calories = calories;
         this.volumeInMilliLiter = volumeInMilliLiter;
