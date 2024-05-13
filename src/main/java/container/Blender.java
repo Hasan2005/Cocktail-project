@@ -16,7 +16,7 @@ public class Blender implements MixtureInfo{
    private ArrayList<Ingredient>blender = new ArrayList<>();
    private static final int  capacityInMilliLiter = 1200;
    private int volumeInMilliLiter;
-   private static double totalAmountOfCalories;
+   private int totalAmountOfCalories;
    private boolean blended;
    
     public static int  getCapacityInMilliLiter() {
@@ -27,7 +27,7 @@ public class Blender implements MixtureInfo{
         return volumeInMilliLiter;
     }
 
-    public static double getTotalAmountOfCalories() {
+    public int getTotalAmountOfCalories() {
         return totalAmountOfCalories;
     }
     
@@ -38,9 +38,9 @@ public class Blender implements MixtureInfo{
     }
    
    
-    public void addIngredient(Ingredient ingredient, int cup, int numberOfCups) throws BlenderOverflowException
+    public void addIngredient(Ingredient ingredient, int cupSize, int numberOfCups) throws BlenderOverflowException
    {
-       if(ingredient.getVolumeInMilliLiter()+ volumeInMilliLiter <= cup*numberOfCups)
+       if(ingredient.getVolumeInMilliLiter()+ volumeInMilliLiter <= cupSize*numberOfCups)
        {
            blender.add(ingredient);
            volumeInMilliLiter += ingredient.getVolumeInMilliLiter();
@@ -110,11 +110,12 @@ public class Blender implements MixtureInfo{
             blue+= color.getBlue();
         }
         
-        int ingredientsCount= blender.size();
+        int ingredientsCount = blender.size();
+        if(ingredientsCount != 0){
         red/=  (short) ingredientsCount;
         green/= (short) ingredientsCount;
         blue/= (short) ingredientsCount;
-        
+        }
         RGB color = new RGB(red, green, blue);
         return color.getColorName();
         

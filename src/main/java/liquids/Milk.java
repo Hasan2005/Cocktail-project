@@ -12,13 +12,17 @@ public class Milk extends Ingredient{
         this.volumeInMilliLiter = volumeInMilliLiter;
         color = new RGB(255, 255, 255);
     }
+
+    public double getVolumeInMilliLiter() {
+        return volumeInMilliLiter;
+    }
     
-     @Override
-     public String getInfo()
+    @Override
+    public String getInfo()
     {
-          StringBuilder info = new StringBuilder();
+        StringBuilder info = new StringBuilder();
           
-          info.append("-------------------------------------------------------------------------\n")
+            info.append("-------------------------------------------------------------------------\n")
                 .append("ingredient: ")
                 .append(name)
                 .append("\n")
@@ -32,7 +36,7 @@ public class Milk extends Ingredient{
                 .append(color.getColorName())
                 .append("\n----------------------------------------------------------------------------");
                   
-          return info.toString();
+        return info.toString();
     }
 
 }
