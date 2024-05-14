@@ -10,7 +10,6 @@ import container.*;
 import exceptions.blender.*;
 import fruits.*;
 import liquids.Milk;
-import interfaces.MixtureInfo;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -330,7 +329,6 @@ public class orderFrame extends javax.swing.JFrame {
             {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
                 fileLogger.log(ex.getMessage());
-                addButton.setEnabled(false);
                 fileLogger.log(howMany + " appeles added successfully");
             }
             apple = "Apple " + appleCount;
@@ -352,7 +350,6 @@ public class orderFrame extends javax.swing.JFrame {
             {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
                 fileLogger.log(ex.getMessage());
-                addButton.setEnabled(false);
                 fileLogger.log(howMany + " bananas added successfully");
             }
             banana = "Banana " + bananaCount;
@@ -373,7 +370,6 @@ public class orderFrame extends javax.swing.JFrame {
             {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
                 fileLogger.log(ex.getMessage());
-                addButton.setEnabled(false);
                 fileLogger.log(howMany + " mangos added successfully");
             }
             mango = "Mango " + mangoCount;
@@ -395,7 +391,6 @@ public class orderFrame extends javax.swing.JFrame {
             {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
                 fileLogger.log(ex.getMessage());
-                addButton.setEnabled(false);
                 fileLogger.log(howMany + " peaches added successfully");
             }
             peach = "Peach " + peachCount;
@@ -417,12 +412,13 @@ public class orderFrame extends javax.swing.JFrame {
             {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
                 fileLogger.log(ex.getMessage());
-                addButton.setEnabled(false);
                 fileLogger.log(howMany + " strawberries added successfully");
             }
             strawberry = "Strawberry " + strawberryCount;
             viewInList();
         }
+        if(cupSize*numberOfCups - blender.getVolumeInMilliLiter() < 10)
+            addButton.setEnabled(false);
 
         capacityTextBox.setText("" + (cupSize*numberOfCups - blender.getVolumeInMilliLiter()));
         blenderVolumeTextBox.setText("" + blender.getVolumeInMilliLiter());
@@ -443,6 +439,7 @@ public class orderFrame extends javax.swing.JFrame {
         {
             blender.blend();
             pourButton.setEnabled(true);
+            blendButton.setEnabled(false);
         } 
         catch (EmptyBlenderException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
@@ -455,7 +452,9 @@ public class orderFrame extends javax.swing.JFrame {
         try
         {
             blender.pour(numberOfCups, cupSize);
-            JOptionPane.showMessageDialog(null, blender.getInfo());
+            JOptionPane.showMessageDialog(null, "================================\n"
+                                       + "number of cups: " + numberOfCups + "\n"
+                                       + "calories per cup: " + ((double)blender.getTotalAmountOfCalories()/numberOfCups) +"\n"+ blender.getInfo());
             fileLogger.log(blender.getInfo());
             blender.clearIngredients();
             clearList();

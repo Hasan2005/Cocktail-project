@@ -1,7 +1,6 @@
 package liquids;
 
 import basaeclasses.Ingredient;
-import interfaces.MixtureInfo;
 import colors.RGB;
 
 public class Milk extends Ingredient{

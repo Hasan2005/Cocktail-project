@@ -40,13 +40,13 @@ public class Cocktail {
                     switch(start){
                               case 1:
                                   blender.clearIngredients();
-                                  consoleLogger.log("starting new order: \n");
-                                       consoleLogger.log("\nchoose the cups size:\n"
+                                  consoleLogger.log("starting new order: ");
+                                       consoleLogger.log("choose the cups size:\n"
                                                                + "1. small (100 ml)\n"
                                                                + "2. medium (200 ml)\n"
-                                                               + "3. large (300 ml)\n");
+                                                               + "3. large (300 ml)");
                                                 int cupSize = read.nextInt();
-                                                while(cupSize < 0 || cupSize > 3 )
+                                                while(cupSize <= 0 || cupSize > 3 )
                                                {
                                                     consoleLogger.log("invalid choice , please choose a number in range 1 - 3 ");
                                                    cupSize = read.nextInt();
@@ -56,48 +56,42 @@ public class Cocktail {
                                            case 1:
                                                 Cup smallCup = new Cup(100);
                                                 cupCapacity = smallCup.getCapacity();
-                                                consoleLogger.log("Cup Size: Small");
                                                 fileLogger.log("Cup Size: Small");
                                                 consoleLogger.log("enter the number of cups, you can choose at maximmum 12 cups");
                                                numberOfCups = read.nextInt();
-                                               while(numberOfCups < 0 || numberOfCups > 12 )
+                                               while(numberOfCups <= 0 || numberOfCups > 12 )
                                                {
                                                     consoleLogger.log("please choose a number in range 1-12");
                                                    numberOfCups = read.nextInt();
                                                } 
-                                               consoleLogger.log("Number Of Cups: " + numberOfCups);
                                                fileLogger.log(("Number Of Cups: " + numberOfCups));
                                                addToCocktail(smallCup.getCapacity(), numberOfCups, blender, consoleLogger, fileLogger);
                                                break;
                                            case 2:
                                                 Cup medCup = new Cup(200);
                                                 cupCapacity = medCup.getCapacity();
-                                                consoleLogger.log("Cup Size: Medium");
                                                 fileLogger.log("Cup Size: Medium");
                                                 consoleLogger.log("enter the number of cups, you can choose at maximmum 6 cups");
                                                 numberOfCups = read.nextInt();
-                                               while(numberOfCups < 0 || numberOfCups > 6 )
+                                               while(numberOfCups <= 0 || numberOfCups > 6 )
                                                {
                                                    consoleLogger.log("please choose a number in range 1-6");
                                                    numberOfCups = read.nextInt();
                                                }
-                                               consoleLogger.log("Number Of Cups: " + numberOfCups);
                                                fileLogger.log(("Number Of Cups: " + numberOfCups));
                                                addToCocktail(medCup.getCapacity(), numberOfCups, blender, consoleLogger, fileLogger);
                                                break;
                                            case 3:
                                                 Cup largeCup = new Cup(400);
                                                 cupCapacity = largeCup.getCapacity();
-                                                consoleLogger.log("Cup Size: Large");
                                                 fileLogger.log("Cup Size: Large");
                                                 consoleLogger.log("enter the number of cups, you can choose at maximmum 3 cups");
                                                numberOfCups = read.nextInt();
-                                               while(numberOfCups < 0 || numberOfCups > 3 )
+                                               while(numberOfCups <= 0 || numberOfCups > 3 )
                                                {
                                                    consoleLogger.log("please choose a number in range 1-3");
                                                    numberOfCups = read.nextInt();
                                                } 
-                                               consoleLogger.log("Number Of Cups: " + numberOfCups);
                                                fileLogger.log(("Number Of Cups: " + numberOfCups));
                                                addToCocktail(largeCup.getCapacity(), numberOfCups, blender, consoleLogger, fileLogger);
                                                break;
@@ -151,7 +145,6 @@ public class Cocktail {
                     }  
        
           }
-           
     }
     public static void addToCocktail(int cupSize, int numberOfCups, Blender blender, MyLogger consoleLogger, MyLogger fileLogger){
           Scanner read = new Scanner(System.in);
@@ -193,7 +186,7 @@ public class Cocktail {
                                     + "5. Strawberry\n"
                                     + "6. Exit\n");
 
-                  consoleLogger.log("add ingredients to the blender: \n");
+                  consoleLogger.log("add ingredients to the blender:");
                   fileLogger.log("add ingredients to the blender:");
                   int IngredientNumber = read.nextInt();
                   switch(IngredientNumber)

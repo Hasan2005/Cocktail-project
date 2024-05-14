@@ -27,7 +27,6 @@ container\Cup.class
 fruits\Banana.class
 GUIcomponents\CupSelectorFrame.class
 GUIcomponents\orderFrame$4.class
-interfaces\MixtureInfo.class
 GUIcomponents\orderFrame.class
 GUIcomponents\WelcomeFrame$2.class
 GUIcomponents\orderFrame$6.class

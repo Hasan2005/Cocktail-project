@@ -8,7 +8,7 @@ public class ConsoleLogger implements MyLogger{
 
     @Override
     public void log(String message) {
-        System.out.println(message + "\n");
+        System.out.println(message );
     }
     
 }
