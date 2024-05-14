@@ -75,7 +75,7 @@ public class Blender implements MixtureInfo{
            throw new NotBlendedException();
        else
        {
-            volumeInMilliLiter -= numberOforederedCups * cupSize;
+            volumeInMilliLiter =  numberOforederedCups * cupSize - volumeInMilliLiter;
             System.out.println("================================\n"
                                        + "number of cups: " + numberOforederedCups + "\n"
                                        + "calories per cup: " + (totalAmountOfCalories/numberOforederedCups) + "\n"

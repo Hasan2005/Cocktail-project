@@ -1,8 +1,10 @@
 GUIcomponents\orderFrame$8.class
 colors\RGB.class
 exceptions\blender\NotBlendedException.class
+loggers\ConsoleLogger.class
 fruits\Strawberry.class
 liquids\Milk.class
+interfaces\MyLogger.class
 GUIcomponents\CupSelectorFrame$4.class
 GUIcomponents\orderFrame$3.class
 GUIcomponents\orderFrame$5.class
@@ -14,6 +16,7 @@ exceptions\blender\EmptyBlenderException.class
 GUIcomponents\CupSelectorFrame$2.class
 GUIcomponents\WelcomeFrame$1.class
 container\Blender.class
+loggers\FileLogger.class
 fruits\Peach.class
 com\mycompany\cocktail\Cocktail.class
 GUIcomponents\orderFrame$2.class

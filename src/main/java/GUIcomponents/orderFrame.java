@@ -16,9 +16,11 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import GUIcomponents.*;
+import interfaces.MyLogger;
 import javax.swing.JOptionPane;
 import java.io.*;
 import javax.swing.ButtonModel;
+import loggers.FileLogger;
 
 public class orderFrame extends javax.swing.JFrame {
     private int cupSize;
@@ -26,6 +28,7 @@ public class orderFrame extends javax.swing.JFrame {
     private boolean milkAdd;
     private String apple, banana, mango, peach, strawberry, milkvolume;
     private Blender blender = new Blender();
+    private MyLogger fileLogger = new FileLogger("history.log");
     
     public orderFrame(int cupSize, int numberOfCups, boolean milkAdd) {
         this.cupSize = cupSize;
@@ -40,16 +43,28 @@ public class orderFrame extends javax.swing.JFrame {
                 viewInList();
             } catch (BlenderOverflowException ex) {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
+                fileLogger.log(ex.getMessage());
             }
         }
         capacityTextBox.setText("" + (numberOfCups*cupSize - blender.getVolumeInMilliLiter()));
+        fileLogger.log("================================\n" + "Order details :");
         if(cupSize == 100)
+        {
+            fileLogger.log("Cup Size: Small");
             cupSizeLabel.setText("Cup Size: Small");
+        }
         else if(cupSize == 200)
+        {
             cupSizeLabel.setText("Cup Size: Medium");
+            fileLogger.log("Cup Size: Medium");
+        }
         else
+        {
             cupSizeLabel.setText("Cup Size: Large");
+            fileLogger.log("Cup Size: Large");
+        }
         numberOfCupsLabel.setText("Number Of Cups: " + numberOfCups);
+        fileLogger.log("Number Of Cups: " + numberOfCups);
     }
     
     @SuppressWarnings("unchecked")
@@ -302,13 +317,21 @@ public class orderFrame extends javax.swing.JFrame {
         howMany = (int) howManySpinner.getValue();
         if(fruitsList.getSelectedValue().equals("Apple")){
             howManySpinner.setValue(1);
-            try {
-                for(int i = 0; i < howMany; i++){
+            try 
+            {
+                for(int i = 0; i < howMany; i++)
+                {
                     blender.addIngredient(new Apple(), cupSize, numberOfCups);
                     appleCount++;
                 }
-            } catch (BlenderOverflowException ex) {
+                fileLogger.log(howMany + " appeles added successfully");
+            } 
+            catch (BlenderOverflowException ex) 
+            {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
+                fileLogger.log(ex.getMessage());
+                addButton.setEnabled(false);
+                fileLogger.log(howMany + " appeles added successfully");
             }
             apple = "Apple " + appleCount;
             viewInList();
@@ -316,55 +339,86 @@ public class orderFrame extends javax.swing.JFrame {
         }
         else if(fruitsList.getSelectedValue().equals("Banana")){
             howManySpinner.setValue(1);
-            try {
+            try 
+            {
                 for(int i = 0; i < howMany; i++)
                 {
                     blender.addIngredient(new Banana(), cupSize, numberOfCups);
                     bananaCount++;
                 }
-            } catch (BlenderOverflowException ex) {
+                fileLogger.log(howMany + " bananas added successfully");
+            } 
+            catch (BlenderOverflowException ex) 
+            {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
+                fileLogger.log(ex.getMessage());
+                addButton.setEnabled(false);
+                fileLogger.log(howMany + " bananas added successfully");
             }
             banana = "Banana " + bananaCount;
             viewInList();
         }
         else if(fruitsList.getSelectedValue().equals("Mango")){
             howManySpinner.setValue(1);
-            try {
+            try 
+            {
                 for(int i = 0; i < howMany; i++)
                 {
                     blender.addIngredient(new Mango(), cupSize, numberOfCups);
                     mangoCount++;
                 }
-            } catch (BlenderOverflowException ex) {
+                fileLogger.log(howMany + " mangos added successfully");
+            } 
+            catch (BlenderOverflowException ex) 
+            {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
+                fileLogger.log(ex.getMessage());
+                addButton.setEnabled(false);
+                fileLogger.log(howMany + " mangos added successfully");
             }
             mango = "Mango " + mangoCount;
             viewInList();
         }
-        else if(fruitsList.getSelectedValue().equals("Peach")){
+        else if(fruitsList.getSelectedValue().equals("Peach"))
+        {
             howManySpinner.setValue(1);
-            try {
+            try
+            {
                 for(int i = 0; i < howMany; i++)
                 {
                     blender.addIngredient(new Peach(), cupSize, numberOfCups);
                     peachCount++;
                 }
-            } catch (BlenderOverflowException ex) {
+                fileLogger.log(howMany + " peaches added successfully");
+            } 
+            catch (BlenderOverflowException ex) 
+            {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
+                fileLogger.log(ex.getMessage());
+                addButton.setEnabled(false);
+                fileLogger.log(howMany + " peaches added successfully");
             }
             peach = "Peach " + peachCount;
             viewInList();
         }
-        else{
+        else
+        {
             howManySpinner.setValue(1);
-            try {
-                for(int i = 0; i < howMany; i++){
+            try 
+            {
+                for(int i = 0; i < howMany; i++)
+                {
                     blender.addIngredient(new Strawberry(), cupSize, numberOfCups);
                     strawberryCount++;
                 }
-            } catch (BlenderOverflowException ex) {
+                fileLogger.log(howMany + " strawberries added successfully");
+            } 
+            catch (BlenderOverflowException ex) 
+            {
                 JOptionPane.showMessageDialog(null, ex.getMessage());
+                fileLogger.log(ex.getMessage());
+                addButton.setEnabled(false);
+                fileLogger.log(howMany + " strawberries added successfully");
             }
             strawberry = "Strawberry " + strawberryCount;
             viewInList();
@@ -379,24 +433,30 @@ public class orderFrame extends javax.swing.JFrame {
     private void finishButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_finishButtonActionPerformed
         dispose();
         JOptionPane.showMessageDialog(null, "Thank you for ordering from us\n We hope to see you again soon :) ");
+        fileLogger.log("Thank you for ordering from us\n We hope to see you again soon :)\n ");
         System.exit(0);
     }//GEN-LAST:event_finishButtonActionPerformed
 
     private void blendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_blendButtonActionPerformed
 
-        try {
+        try 
+        {
             blender.blend();
             pourButton.setEnabled(true);
-        } catch (EmptyBlenderException ex) {
+        } 
+        catch (EmptyBlenderException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
+             fileLogger.log(ex.getMessage());
         }
         mixtureColorTextBox.setText(blender.getColor());
     }//GEN-LAST:event_blendButtonActionPerformed
 
     private void pourButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pourButtonActionPerformed
-        try {
+        try
+        {
             blender.pour(numberOfCups, cupSize);
             JOptionPane.showMessageDialog(null, blender.getInfo());
+            fileLogger.log(blender.getInfo());
             blender.clearIngredients();
             clearList();
             capacityTextBox.setText("");
@@ -411,10 +471,14 @@ public class orderFrame extends javax.swing.JFrame {
             newOrderButton.setEnabled(true);
             finishButton.setEnabled(true);
 
-        } catch (EmptyBlenderException ex) {
+        } 
+        catch (EmptyBlenderException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
-        } catch (NotBlendedException ex) {
+            fileLogger.log(ex.getMessage());
+        } 
+        catch (NotBlendedException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
+            fileLogger.log(ex.getMessage());
         }
     }//GEN-LAST:event_pourButtonActionPerformed
 
